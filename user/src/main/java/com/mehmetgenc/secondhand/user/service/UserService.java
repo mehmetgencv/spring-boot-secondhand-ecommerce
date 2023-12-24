@@ -35,7 +35,7 @@ public class UserService {
         return userDtoConverter.convert(user);
     }
 
-    public UserDto createUser(CreateUserRequest userRequest) {
+    public UserDto createUser(final CreateUserRequest userRequest) {
         User user = new User(
                 userRequest.getMail(),
                 userRequest.getFirstName(),
@@ -46,7 +46,7 @@ public class UserService {
         return userDtoConverter.convert(userRepository.save(user));
     }
 
-    public UserDto updateUser(String mail, UpdateUserRequest updateUserRequest) {
+    public UserDto updateUser(final String mail, final UpdateUserRequest updateUserRequest) {
         User user = findUserByMail(mail);
         if (!user.getActive()){
             logger.warn(String.format("The user is not active! User Mail: %s", mail));
@@ -60,20 +60,20 @@ public class UserService {
                 user.getActive());
         return userDtoConverter.convert(userRepository.save(updatedUser));
     }
-    public void deactivateUser(Long id) {
+    public void deactivateUser(final Long id) {
         changeActivateUser(id, false);
     }
 
-    public void activateUser(Long id) {
+    public void activateUser(final Long id) {
         changeActivateUser(id, true);
     }
-    public void deleteUser(Long id) {
+    public void deleteUser(final Long id) {
         findUserById(id);
         userRepository.deleteById(id);
 
     }
 
-    private void changeActivateUser(Long id, Boolean isActive){
+    private void changeActivateUser(final Long id, final Boolean isActive){
         User user = findUserById(id);
         User updatedUser = new User(user.getId(),
                 user.getMail(),
@@ -84,12 +84,12 @@ public class UserService {
         userRepository.save(updatedUser);
     }
 
-    private User findUserByMail(String mail){
+    private User findUserByMail(final String mail){
         return userRepository.findUserByMail(mail)
                 .orElseThrow(()-> new UserNotFoundException("User couldn't be found by following mail: " + mail));
     }
 
-    private User findUserById(Long id){
+    protected User findUserById(final Long id){
         return userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException("User couldn't be found by following id: " + id));
     }
