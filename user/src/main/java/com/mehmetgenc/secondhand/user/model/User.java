@@ -3,6 +3,7 @@ package com.mehmetgenc.secondhand.user.model;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +17,9 @@ public class User {
     private String middleName;
     private String lastName;
     private Boolean isActive;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<UserDetails> userDetailsSet;
 
     public User(Long id, String mail, String firstName, String middleName, String lastName, Boolean isActive) {
         this.id = id;
