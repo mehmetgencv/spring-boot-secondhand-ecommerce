@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userDtoConverter::convert).collect(Collectors.toList());
+        return userDtoConverter.convert(userRepository.findAll());
     }
 
     public UserDto getUserByMail(String mail) {
@@ -41,7 +41,7 @@ public class UserService {
                 userRequest.getFirstName(),
                 userRequest.getMiddleName(),
                 userRequest.getLastName(),
-                true
+                false
         );
         return userDtoConverter.convert(userRepository.save(user));
     }
@@ -56,7 +56,8 @@ public class UserService {
                 user.getMail(),
                 updateUserRequest.getFirstName(),
                 updateUserRequest.getMiddleName(),
-                updateUserRequest.getLastName());
+                updateUserRequest.getLastName(),
+                user.getActive());
         return userDtoConverter.convert(userRepository.save(updatedUser));
     }
     public void deactivateUser(Long id) {
@@ -67,11 +68,9 @@ public class UserService {
         changeActivateUser(id, true);
     }
     public void deleteUser(Long id) {
-        if(doesUserExists(id)){
-            userRepository.deleteById(id);
-        }else{
-            throw new UserNotFoundException("User couldn't be found by following id: " + id);
-        }
+        findUserById(id);
+        userRepository.deleteById(id);
+
     }
 
     private void changeActivateUser(Long id, Boolean isActive){
@@ -94,10 +93,5 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(()-> new UserNotFoundException("User couldn't be found by following id: " + id));
     }
-
-    private boolean doesUserExists(Long id){
-        return userRepository.existsById(id);
-    }
-
 
 }
