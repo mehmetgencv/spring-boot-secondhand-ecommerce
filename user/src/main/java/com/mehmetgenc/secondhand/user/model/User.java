@@ -2,6 +2,8 @@ package com.mehmetgenc.secondhand.user.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -67,4 +69,16 @@ public class User {
         return isActive;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(mail, user.mail) && Objects.equals(firstName, user.firstName) && Objects.equals(middleName, user.middleName) && Objects.equals(lastName, user.lastName) && Objects.equals(isActive, user.isActive);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, mail, firstName, middleName, lastName, isActive);
+    }
 }
