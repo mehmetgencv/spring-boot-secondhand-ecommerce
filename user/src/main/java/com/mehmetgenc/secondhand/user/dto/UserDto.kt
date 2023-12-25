@@ -6,4 +6,5 @@ data class UserDto(
         val firstName: String?,
         val middleName: String?,
         val lastName: String?,
+        val userDetails: List<UserDetailsDto>
 )
