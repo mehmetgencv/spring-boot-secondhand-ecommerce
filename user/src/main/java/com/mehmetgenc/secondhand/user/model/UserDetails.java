@@ -18,7 +18,7 @@ public class UserDetails {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User users;
     public UserDetails(Long id, String phoneNumber, String address, String city, String country, String postCode, User user) {
         this.id = id;
         this.phoneNumber = phoneNumber;
@@ -26,7 +26,7 @@ public class UserDetails {
         this.city = city;
         this.country = country;
         this.postCode = postCode;
-        this.user = user;
+        this.users = user;
     }
 
     public UserDetails(String phoneNumber, String address, String city, String country, String postCode, User user) {
@@ -35,7 +35,7 @@ public class UserDetails {
         this.city = city;
         this.country = country;
         this.postCode = postCode;
-        this.user = user;
+        this.users = user;
     }
 
     public UserDetails() {
@@ -67,7 +67,7 @@ public class UserDetails {
     }
 
     public User getUser() {
-        return user;
+        return users;
     }
 
     @Override
@@ -75,11 +75,11 @@ public class UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDetails that = (UserDetails) o;
-        return Objects.equals(id, that.id) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(postCode, that.postCode) && Objects.equals(user, that.user);
+        return Objects.equals(id, that.id) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(postCode, that.postCode) && Objects.equals(users, that.users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, phoneNumber, address, city, country, postCode, user);
+        return Objects.hash(id, phoneNumber, address, city, country, postCode, users);
     }
 }
