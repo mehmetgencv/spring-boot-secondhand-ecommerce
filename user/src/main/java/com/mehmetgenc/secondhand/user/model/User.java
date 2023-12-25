@@ -2,6 +2,7 @@ package com.mehmetgenc.secondhand.user.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class User {
     private Boolean isActive;
 
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<UserDetails> userDetailsSet;
+    private Set<UserDetails> userDetailsSet = new HashSet<>();
 
     public User(Long id, String mail, String firstName, String middleName, String lastName, Boolean isActive) {
         this.id = id;
@@ -43,6 +44,16 @@ public class User {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+    }
+
+    public User(Long id, String mail, String firstName, String middleName, String lastName, Boolean isActive, Set<UserDetails> userDetailsSet) {
+        this.id = id;
+        this.mail = mail;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.isActive = isActive;
+        this.userDetailsSet = userDetailsSet;
     }
 
     public User() {
@@ -71,6 +82,10 @@ public class User {
 
     public Boolean getActive() {
         return isActive;
+    }
+
+    public Set<UserDetails> getUserDetailsSet() {
+        return userDetailsSet;
     }
 
     @Override
