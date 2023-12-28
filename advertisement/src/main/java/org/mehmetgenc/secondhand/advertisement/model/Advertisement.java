@@ -26,12 +26,21 @@ public class Advertisement {
     @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date lastModifiedDate;
 
+    public Advertisement() {
+    }
+
     public Advertisement(String title, String description, Double price, Date creationDate, Date lastModifiedDate) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.creationDate = creationDate;
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public Advertisement(String title, String description, Double price) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
     }
 
     public String getId() {
@@ -56,5 +65,17 @@ public class Advertisement {
 
     public Date getLastModifiedDate() {
         return lastModifiedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", creationDate=" + creationDate +
+                ", lastModifiedDate=" + lastModifiedDate +
+                '}';
     }
 }
