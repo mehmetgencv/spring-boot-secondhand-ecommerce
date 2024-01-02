@@ -94,4 +94,7 @@ public class UserService {
                 .orElseThrow(()-> new UserNotFoundException("User couldn't be found by following id: " + id));
     }
 
+    public Boolean isUserIdExist(Long id) {
+        return userRepository.existsById(id);
+    }
 }
