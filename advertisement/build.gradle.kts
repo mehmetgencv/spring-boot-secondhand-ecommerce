@@ -25,6 +25,8 @@ dependencies {
     implementation("co.elastic.clients:elasticsearch-java:8.7.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
     implementation("org.elasticsearch.client:elasticsearch-rest-high-level-client:7.15.0")
+    implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+    annotationProcessor ("org.mapstruct:mapstruct-processor:1.5.5.Final")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

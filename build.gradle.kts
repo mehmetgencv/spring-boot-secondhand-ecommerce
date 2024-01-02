@@ -23,6 +23,8 @@ dependencies {
 	implementation(project(":user"))
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("com.mysql:mysql-connector-j")
+	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+	annotationProcessor ("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation ("org.junit.jupiter:junit-jupiter-api:5.8.1")
