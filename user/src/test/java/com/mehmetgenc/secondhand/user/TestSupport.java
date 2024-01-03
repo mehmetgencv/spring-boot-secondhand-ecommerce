@@ -28,7 +28,8 @@ public class TestSupport {
                 from.getMail(),
                 from.getFirstName(),
                 from.getMiddleName(),
-                from.getLastName())).toList();
+                from.getLastName(),
+                from.getUserDetailsSet())).toList();
     }
 
     public static User generateUser(String mail){
